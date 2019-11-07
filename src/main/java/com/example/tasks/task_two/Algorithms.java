@@ -84,26 +84,32 @@ public class Algorithms {
     }
 
     public static List<Worker> mergeWorkersLists(List<Worker> workersOld, List<Worker> workersNew){
-        List<Worker> newWorkerList = new ArrayList<>();
+        //List<Worker> newWorkerList = new ArrayList<>();
         List<Worker> safeWorkersNew = new ArrayList<>(workersNew);
-        boolean flagFirst = false;
-        boolean flagSecond = false;
+        boolean flag = true;
         for(int i = 0; i < workersOld.size(); i++){
-            flagFirst = false;
             for(int j = 0; j < safeWorkersNew.size(); j++){
-                if(workersOld.get(i).equals(safeWorkersNew.get(j))){
-                    newWorkerList.add(safeWorkersNew.get(j));
+                if(!workersOld.get(i).equals(safeWorkersNew.get(j)) && safeWorkersNew.get(j).getId() == workersOld.get(i).getId()){
+                    workersOld.set(i,safeWorkersNew.get(j));
                     safeWorkersNew.remove(j);
-                    flagFirst = true;
+                    flag = true;
                     break;
                 }
+                else if(workersOld.get(i).equals(safeWorkersNew.get(j))){
+                    safeWorkersNew.remove(j);
+                    flag = true;
+                    break;
+                }
+                else{
+                    flag = false;
+                }
             }
-            if(!flagFirst){
-                newWorkerList.add(workersOld.get(i));
+            if(!flag){
+                workersOld.remove(i);
+                i--;
             }
         }
-        newWorkerList.addAll(safeWorkersNew);
-        System.out.println("");
-        return newWorkerList;
+        workersOld.addAll(safeWorkersNew);
+        return workersOld;
     }
 }

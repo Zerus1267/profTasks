@@ -9,6 +9,8 @@ public abstract class Worker {
     private int workedHours;
     private final int weekWorkingNorma = 40; // Норма отработаных часов на неделю
     private Address address;
+    @JsonIgnore
+    private int id; // Поле для таска на merge. Создан для того что бы идентифицировать работника для изменения его свойств. Можно брать любое уникальное поле
 
     public Worker() {
     }
@@ -55,6 +57,15 @@ public abstract class Worker {
         this.address = address;
     }
 
+    @JsonIgnore
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -62,15 +73,12 @@ public abstract class Worker {
         Worker worker = (Worker) o;
         return Double.compare(worker.getStake(), getStake()) == 0 &&
                 getWorkedHours() == worker.getWorkedHours() &&
+                getId() == worker.getId() &&
                 Objects.equals(getAddress(), worker.getAddress());
-        /*if (this == o) return true;
-        if (!(o instanceof Worker)) return false;
-        Worker worker = (Worker) o;
-        return Double.compare(worker.getStake(), getStake()) == 0 && getWorkedHours() == worker.getWorkedHours();*/
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(15*getStake(), 7*getWorkedHours(), getAddress());
+        return Objects.hash(15*getStake(), 7*getWorkedHours(), getAddress(), getId());
     }
 }
