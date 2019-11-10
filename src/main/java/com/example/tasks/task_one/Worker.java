@@ -2,14 +2,24 @@ package com.example.tasks.task_one;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+
+@Entity
+@Table(name = "worker")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "worker_type")
 public abstract class Worker {
+    @Column(name = "worker_stake")
     private double stake; // ставка при 100% отработке
+    @Column(name = "worker_hours")
     private int workedHours;
-    private final int weekWorkingNorma = 40; // Норма отработаных часов на неделю
+    @Embedded
     private Address address;
     @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id; // Поле для таска на merge. Создан для того что бы идентифицировать работника для изменения его свойств. Можно брать любое уникальное поле
 
     public Worker() {
@@ -30,7 +40,9 @@ public abstract class Worker {
 
     @JsonIgnore
     public double getPureWorkLoad(){
-        return this.workedHours/(double)(this.weekWorkingNorma*4);
+        // Норма отработаных часов на неделю
+        int weekWorkingNorma = 40;
+        return this.workedHours/(double)(weekWorkingNorma *4);
     }
 
     public void setStake(int stake) {

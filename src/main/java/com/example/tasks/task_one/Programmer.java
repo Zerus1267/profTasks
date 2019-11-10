@@ -1,6 +1,10 @@
 package com.example.tasks.task_one;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("PRG")
 public class Programmer extends Worker{
 
     public Programmer() {

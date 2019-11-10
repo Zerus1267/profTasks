@@ -66,6 +66,13 @@
             <artifactId>tomcat-dbcp</artifactId>
             <version>9.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.197</version>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

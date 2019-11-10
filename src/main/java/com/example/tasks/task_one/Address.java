@@ -1,7 +1,10 @@
 package com.example.tasks.task_one;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
+@Embeddable
 public class Address {
     private String city;
     private String street;

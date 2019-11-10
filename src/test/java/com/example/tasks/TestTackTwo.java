@@ -54,5 +54,8 @@ public class TestTackTwo {
         scripts.createTables();
     }
 
+    void insertTestData(){
+
+    }
 
 }

@@ -13,7 +13,67 @@ public class Algorithms {
     public Algorithms() {
     }
 
+    private static int getFirstVowelIndex(String str){
+        String vowels = "aeiou";
+        for(int i = 0; i < str.length(); i++){
+            if(vowels.contains(String.valueOf(str.charAt(i)))) return i;
+        }
+        return -1;
+    }
+
     public static String interviewRecursionTest(String str){
+        StringBuilder stringBuilder = new StringBuilder(str);
+        if(!str.contains("*")){
+            int firstVowelIndex = getFirstVowelIndex(str);
+            if(firstVowelIndex == -1) return "There are no vowels in the String";
+            else if(firstVowelIndex != 0){
+                stringBuilder.insert(firstVowelIndex, "*");
+                stringBuilder.insert(firstVowelIndex+2, "*");
+                stringBuilder.insert(firstVowelIndex+3, "|");
+                return interviewRecursionTest(stringBuilder.toString());
+            }
+            else{
+                stringBuilder.insert(firstVowelIndex+1, "*");
+                stringBuilder.insert(firstVowelIndex+2, "|");
+                return interviewRecursionTest(stringBuilder.toString());
+            }
+        }
+        else {
+            int lastLineIndex = stringBuilder.lastIndexOf("|");
+            char nextChar;
+            try{
+                nextChar = stringBuilder.charAt(lastLineIndex + 1);
+            }
+            catch (StringIndexOutOfBoundsException e ){
+                stringBuilder.deleteCharAt(lastLineIndex);
+                return stringBuilder.toString();
+            }
+            if (nextChar == 'a' || nextChar == 'e' || nextChar == 'i' || nextChar == 'o' || nextChar == 'u') {
+                if (lastLineIndex + 1 != stringBuilder.length() - 1) {
+                    stringBuilder.insert(lastLineIndex + 2, "*");
+                    stringBuilder.insert(lastLineIndex + 3, "|");
+                    stringBuilder.deleteCharAt(lastLineIndex);
+                    return interviewRecursionTest(stringBuilder.toString());
+                }
+                else {
+                    stringBuilder.insert(lastLineIndex+1, "*");
+                    stringBuilder.deleteCharAt(lastLineIndex);
+                    return stringBuilder.toString();
+                }
+            }
+            else {
+                if (lastLineIndex != stringBuilder.length() - 1) {
+                    stringBuilder.insert(lastLineIndex + 2, "|");
+                    stringBuilder.deleteCharAt(lastLineIndex);
+                    return interviewRecursionTest(stringBuilder.toString());
+                } else {
+                    return stringBuilder.toString();
+                }
+            }
+        }
+    }
+
+    public static String nonRecursiveInterviewTest(String str){
         String lowerStr = str.toLowerCase();
         char[] chars = lowerStr.toCharArray();
         char[] initialChars = str.toCharArray();
