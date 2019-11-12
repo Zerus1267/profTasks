@@ -1,5 +1,6 @@
 package com.example.tasks;
 
+import com.example.tasks.task_four.WorkerDAOImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
