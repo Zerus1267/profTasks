@@ -23,8 +23,6 @@ import java.util.List;
 @SpringBootTest
 public class TestTackTwo {
 
-
-
     @Test
     public void stringVowelWithAsterisk(){
         String string1 = "hello";
@@ -32,10 +30,10 @@ public class TestTackTwo {
         String string3 = "abc";
         String string4 = "oab";
 
-        Assert.assertEquals("h*e*ll*o", Algorithms.interviewRecursionTest(string1));
-        Assert.assertEquals("h*e*a*l*o", Algorithms.interviewRecursionTest(string2));
-        Assert.assertEquals("a*bc", Algorithms.interviewRecursionTest(string3));
-        Assert.assertEquals("o*a*b", Algorithms.interviewRecursionTest(string4));
+        Assert.assertEquals("h*e*ll*o", Algorithms.newRecursiveMethod(string1));
+        Assert.assertEquals("h*e*a*l*o", Algorithms.newRecursiveMethod(string2));
+        Assert.assertEquals("a*bc", Algorithms.newRecursiveMethod(string3));
+        Assert.assertEquals("o*a*b", Algorithms.newRecursiveMethod(string4));
     }
 
     @Test

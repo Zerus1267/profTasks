@@ -1,28 +1,18 @@
 package com.example.tasks;
 
-import com.example.tasks.task_four.HibernateUtil;
 import com.example.tasks.task_four.WorkerDAOImpl;
 import com.example.tasks.task_one.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @SpringBootTest
 public class TestTaskFour {
-    List<Worker> workers;
-    WorkerDAOImpl workerDAO;
+    private List<Worker> workers;
+    private WorkerDAOImpl workerDAO;
 
     @Before
     public void createWorkers(){

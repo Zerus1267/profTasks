@@ -13,6 +13,31 @@ public class Algorithms {
     public Algorithms() {
     }
 
+    public static String newRecursiveMethod(String str){
+        StringBuffer out = new StringBuffer();
+        char[] in = str.toCharArray();
+        int length = str.length();
+        String vowels = "aeiou";
+        doAsterisk(out,in, 0, length, vowels);
+        return out.toString();
+    }
+    private static void doAsterisk(StringBuffer out, char[] in, int index, int length, String vowels){
+        if(index == length){
+            if(vowels.contains(String.valueOf(in[length-1]))) out.setLength(out.length()-1);
+            System.out.println(out.toString());
+            return;
+        }
+        try {
+            if (!vowels.contains(String.valueOf(in[index]))) out.append(in[index]);
+            else if (index == 0) out.append(in[index]).append("*");
+            else if (out.charAt(out.length()-1) == '*') out.append(in[index]).append("*");
+            else out.append("*").append(in[index]).append("*");
+        }
+        finally {
+            doAsterisk(out, in, index + 1, length, vowels);
+        }
+    }
+
     private static int getFirstVowelIndex(String str){
         String vowels = "aeiou";
         for(int i = 0; i < str.length(); i++){

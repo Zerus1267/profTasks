@@ -5,11 +5,9 @@ import com.example.tasks.task_one.Manager;
 import com.example.tasks.task_one.Programmer;
 import com.example.tasks.task_one.Worker;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WorkerDAOImpl implements WorkerDAO {
