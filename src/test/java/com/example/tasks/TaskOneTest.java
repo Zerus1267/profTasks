@@ -1,6 +1,6 @@
 /*
-* FINISHED
-* */
+ * FINISHED
+ * */
 
 package com.example.tasks;
 
@@ -23,7 +23,7 @@ class TaskOneTest {
     private List<Worker> workers;
 
     @BeforeEach
-    public void onSetup(){
+    public void onSetup() {
 
         workers = new ArrayList<>();
         workers.add(new Programmer());

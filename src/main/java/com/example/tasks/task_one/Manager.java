@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("MNG")
-public class Manager extends Worker{
+public class Manager extends Worker {
 
     public Manager() {
     }
@@ -18,10 +18,22 @@ public class Manager extends Worker{
         super(stake, workedHours, address);
     }
 
+    // Old version
     @Override
     public double calculateSalary() {
         double workLoadCoefficient = super.getPureWorkLoad();
-        if(workLoadCoefficient >= 1.0) workLoadCoefficient = 1.0;
-        return super.getStake()*workLoadCoefficient;
+        if (workLoadCoefficient >= 1.0) workLoadCoefficient = 1.0;
+        return super.getStake() * workLoadCoefficient;
+    }
+
+    // New version
+    @Override
+    public double calculateWorkLoad(double neededHours) {
+        double workLoad = super.getWorkedHours() / neededHours;
+        if (workLoad >= 1.0) {
+            return 1.0;
+        } else {
+            return workLoad;
+        }
     }
 }

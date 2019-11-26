@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("PRG")
-public class Programmer extends Worker{
+public class Programmer extends Worker {
 
     public Programmer() {
     }
@@ -18,8 +18,15 @@ public class Programmer extends Worker{
         super(stake, workedHours, address);
     }
 
+    // Old version
     @Override
     public double calculateSalary() {
-        return super.getStake()*super.getPureWorkLoad();
+        return super.getStake() * super.getPureWorkLoad();
+    }
+
+    // New version
+    @Override
+    public double calculateWorkLoad(double neededHours) {
+        return super.getWorkedHours() / neededHours;
     }
 }

@@ -1,6 +1,6 @@
 /*
-* NOT FINISHED YET
-* */
+ * NOT FINISHED YET
+ * */
 
 package com.example.tasks;
 
@@ -24,7 +24,7 @@ import java.util.List;
 public class TestTackTwo {
 
     @Test
-    public void stringVowelWithAsterisk(){
+    public void stringVowelWithAsterisk() {
         String string1 = "hello";
         String string2 = "healo";
         String string3 = "abc";
@@ -37,7 +37,7 @@ public class TestTackTwo {
     }
 
     @Test
-    public void codingBinarySignalsToZeroes(){
+    public void codingBinarySignalsToZeroes() {
         String signal1 = "01000111";
         String signal2 = "101101010111";
 
@@ -52,7 +52,7 @@ public class TestTackTwo {
         scripts.createTables();
     }
 
-    void insertTestData(){
+    void insertTestData() {
 
     }
 

@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,28 +16,27 @@ public class TestTaskFour {
     private WorkerDAOImpl workerDAO;
 
     @Before
-    public void createWorkers(){
+    public void createWorkers() {
         workerDAO = new WorkerDAOImpl();
         workers = new ArrayList<>();
-        workers.add(new Programmer(2000, 200, new Address("Poltava","Grusha")));
+        workers.add(new Programmer(2000, 200, new Address("Poltava", "Grusha")));
         workers.add(new Manager(1500, 210, new Address("Kharkiv", "Sumskaya")));
-        workers.add(new Programmer(2500, 160, new Address("Kharkiv","Tselynogradska")));
+        workers.add(new Programmer(2500, 160, new Address("Kharkiv", "Tselynogradska")));
         workers.add(new Manager(1800, 140, new Address("Kyiv", "Maidan")));
     }
 
     @Test
-    public void ainsertIntoDBTest(){
+    public void ainsertIntoDBTest() {
         try {
             workerDAO.saveWorkers(workers);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Assert.fail();
         }
     }
 
     @Test
-    public void breadFromDBTable(){
+    public void breadFromDBTable() {
         List<Worker> workersTest = workerDAO.getAllWorkers();
         Assert.assertNotNull(workersTest);
         Accountant accountant = new Accountant(workers);

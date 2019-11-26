@@ -15,10 +15,10 @@ public class Accountant {
         this.workers = workers;
     }
 
-    public double calcMonthSalary(){
+    public double calcMonthSalary() {
         double resSalary = 0;
-        for(Worker worker: this.workers){
-            resSalary += worker.calculateSalary();
+        for (Worker worker : this.workers) {
+            resSalary += worker.calculateWorkLoad(40 * 4.0) * worker.getStake();
         }
         return resSalary;
     }

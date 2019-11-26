@@ -20,9 +20,9 @@ public class TestTaskThree {
     List<Worker> workers = new ArrayList<>();
 
     @BeforeEach
-    public void setup(){
-        Worker worker = new Programmer(5000,200);
-        Worker worker1 = new Manager(3000,120);
+    public void setup() {
+        Worker worker = new Programmer(5000, 200);
+        Worker worker1 = new Manager(3000, 120);
         workers.add(worker);
         workers.add(worker1);
     }

@@ -1,10 +1,8 @@
 package com.example.tasks.task_one;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Objects;
-
 
 @Entity
 @Table(name = "worker")
@@ -36,14 +34,19 @@ public abstract class Worker {
         this.address = address;
     }
 
+    // Old version
     public abstract double calculateSalary();
 
+    // Old version (accessory method)
     @JsonIgnore
-    public double getPureWorkLoad(){
+    public double getPureWorkLoad() {
         // Норма отработаных часов на неделю
         int weekWorkingNorma = 40;
-        return this.workedHours/(double)(weekWorkingNorma *4);
+        return this.workedHours / (double) (weekWorkingNorma * 4);
     }
+
+    // New version
+    public abstract double calculateWorkLoad(double neededHours);
 
     public void setStake(int stake) {
         this.stake = stake;
@@ -91,6 +94,6 @@ public abstract class Worker {
 
     @Override
     public int hashCode() {
-        return Objects.hash(15*getStake(), 7*getWorkedHours(), getAddress(), getId());
+        return Objects.hash(15 * getStake(), 7 * getWorkedHours(), getAddress(), getId());
     }
 }

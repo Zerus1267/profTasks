@@ -12,7 +12,7 @@ public class JSONMapper {
 
     public static void writeIntoJSON(Accountant accountant) throws IOException {
         objectMapper.enableDefaultTyping();
-        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/java/com/example/tasks/task_three/test1.json"),accountant);
+        objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File("src/main/java/com/example/tasks/task_three/test1.json"), accountant);
     }
 
     public static Accountant readFromJSONFile() throws IOException {

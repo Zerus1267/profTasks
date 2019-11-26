@@ -22,25 +22,25 @@ public class MergeTest {
     private List<Worker> deepTest = new ArrayList<>();
 
     @Before
-    public void setupDeepMerge(){
-        Worker worker1 = new Manager(5000,160, new Address("Poltava","Grushevskogo"));
+    public void setupDeepMerge() {
+        Worker worker1 = new Manager(5000, 160, new Address("Poltava", "Grushevskogo"));
         worker1.setId(1);
-        Worker worker2 = new Programmer(4000,200, new Address("Kharkiv","Sumskaya"));
+        Worker worker2 = new Programmer(4000, 200, new Address("Kharkiv", "Sumskaya"));
         worker2.setId(2);
-        Worker worker3 = new Manager(1500,180, new Address("Kyiv", "Maidan"));
+        Worker worker3 = new Manager(1500, 180, new Address("Kyiv", "Maidan"));
         worker3.setId(3);
-        Worker worker4 = new Manager(5500,200, new Address("Kyiv", "HTZ"));
+        Worker worker4 = new Manager(5500, 200, new Address("Kyiv", "HTZ"));
         worker3.setId(5);
-        Worker worker5 = new Programmer(1500,180, new Address("Kharkiv", "Obschaga"));
+        Worker worker5 = new Programmer(1500, 180, new Address("Kharkiv", "Obschaga"));
         worker3.setId(6);
 
-        Worker workerA1 = new Manager(5000,160, new Address("Poltava","Vakulenci"));
+        Worker workerA1 = new Manager(5000, 160, new Address("Poltava", "Vakulenci"));
         workerA1.setId(1);
-        Worker workerA2 = new Manager(1500,180, new Address("Kyiv", "Maidan"));
+        Worker workerA2 = new Manager(1500, 180, new Address("Kyiv", "Maidan"));
         workerA2.setId(3);
-        Worker workerA3 = new Programmer(4000,200, new Address("Kharkiv","Sumskaya"));
+        Worker workerA3 = new Programmer(4000, 200, new Address("Kharkiv", "Sumskaya"));
         workerA3.setId(2);
-        Worker workerA4 = new Manager(1000,100, new Address("Dnipro","DniproStreet"));
+        Worker workerA4 = new Manager(1000, 100, new Address("Dnipro", "DniproStreet"));
         workerA4.setId(4);
         workers1.add(worker1);
         workers1.add(worker2);
@@ -60,27 +60,27 @@ public class MergeTest {
     }
 
     @Test
-    public void deepMergeListOfWorkers(){
-        Assert.assertEquals("Алгоритм deep merge работает не так как нужно", deepTest, Algorithms.mergeWorkersLists(workers1,workers2));
+    public void deepMergeListOfWorkers() {
+        Assert.assertEquals("Алгоритм deep merge работает не так как нужно", deepTest, Algorithms.mergeWorkersLists(workers1, workers2));
         // Здесь также главным является переопределение equals & hashcode, что бы они учитывали значения вложеных свойств
     }
 
     @Test
-    public void mergeListOfWorkers(){
-        Worker worker1 = new Manager(5000,160);
+    public void mergeListOfWorkers() {
+        Worker worker1 = new Manager(5000, 160);
         worker1.setId(1);
-        Worker worker2 = new Programmer(4000,200);
+        Worker worker2 = new Programmer(4000, 200);
         worker2.setId(2);
-        Worker worker3 = new Manager(1500,180);
+        Worker worker3 = new Manager(1500, 180);
         worker3.setId(3);
 
-        Worker workerA1 = new Manager(5000,160);
+        Worker workerA1 = new Manager(5000, 160);
         workerA1.setId(1);
-        Worker workerA2 = new Manager(1500,200);
+        Worker workerA2 = new Manager(1500, 200);
         workerA2.setId(3);
-        Worker workerA3 = new Programmer(4000,200);
+        Worker workerA3 = new Programmer(4000, 200);
         workerA3.setId(2);
-        Worker workerA4 = new Manager(1000,100);
+        Worker workerA4 = new Manager(1000, 100);
         workerA4.setId(4);
 
         workers1.add(worker1);
@@ -97,12 +97,12 @@ public class MergeTest {
         test.add(worker2);
         test.add(workerA2);
         test.add(workerA4); // Единственный не повторяющийся елемент из двух списков
-        Assert.assertEquals("Алгоритм merge работает не так как нужно", test, Algorithms.mergeWorkersLists(workers1,workers2));
+        Assert.assertEquals("Алгоритм merge работает не так как нужно", test, Algorithms.mergeWorkersLists(workers1, workers2));
         // сама проблема задачи в переопределении equals & hashcode поэтому необходимо переопределять их и для вложенных свойств обьектов.
     }
 
     @After
-    public void clearLists(){
+    public void clearLists() {
         workers1.clear();
         workers2.clear();
         deepTest.clear();

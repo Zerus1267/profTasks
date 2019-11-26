@@ -9,16 +9,15 @@ public class Scripts {
     private Connection connection;
 
     public Scripts() {
-        try{
+        try {
             Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection(conString,user,password);
-        }
-        catch (Exception e){
+            connection = DriverManager.getConnection(conString, user, password);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public Scripts(Connection connection){
+    public Scripts(Connection connection) {
         this.connection = connection;
     }
 
@@ -48,10 +47,10 @@ public class Scripts {
         //В этом запросе было выведено колво Уникальных студентов для каждого преподователя, и отбор был произведен по количеству Уникальных студентов которые посещают их курсы.
         //Для учета дублирующмхся студентов достаточно убрать оператор distinct в параметрах count.
 
-        preparedStatement.setInt(1,2000);
+        preparedStatement.setInt(1, 2000);
         ResultSet resultSet = preparedStatement.executeQuery();
         int i = 0;
-        while(resultSet.next()) i++;
+        while (resultSet.next()) i++;
         return i;
     }
 
@@ -60,7 +59,7 @@ public class Scripts {
                 "and course_title = 'Programming' and marks.mark > 4 order by student.first_name;");
         ResultSet resultSet = preparedStatement.executeQuery();
         int i = 0;
-        while(resultSet.next()) i++;
+        while (resultSet.next()) i++;
         return i;
     }
 
