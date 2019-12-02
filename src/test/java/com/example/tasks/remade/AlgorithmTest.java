@@ -8,16 +8,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class AlgorithmTest {
 
+    private String string1 = "hello";
+    private String string2 = "healo";
+    private String string3 = "abc";
+    private String string4 = "oab";
+
     @Test
     public void recursionTest() {
-        String string1 = "hello";
-        String string2 = "healo";
-        String string3 = "abc";
-        String string4 = "oab";
         Assert.assertEquals("h*e*ll*o", Algorithms.newRecursiveMethod(string1));
         Assert.assertEquals("h*e*a*l*o", Algorithms.newRecursiveMethod(string2));
         Assert.assertEquals("a*bc", Algorithms.newRecursiveMethod(string3));
         Assert.assertEquals("o*a*b", Algorithms.newRecursiveMethod(string4));
+
+    }
+
+    @Test
+    public void recursionWithHashTest() {
+        Assert.assertEquals("h*e*ll*o", Algorithms.newRecursiveMethodTest(string1));
+        Assert.assertEquals("h*e*a*l*o", Algorithms.newRecursiveMethodTest(string2));
+        Assert.assertEquals("a*bc", Algorithms.newRecursiveMethodTest(string3));
+        Assert.assertEquals("o*a*b", Algorithms.newRecursiveMethodTest(string4));
+
     }
 
     @Test

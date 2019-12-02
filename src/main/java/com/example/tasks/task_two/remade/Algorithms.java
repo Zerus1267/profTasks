@@ -1,6 +1,18 @@
 package com.example.tasks.task_two.remade;
 
+import java.util.HashSet;
+
 public class Algorithms {
+
+    private static HashSet<Character> vowelSet = new HashSet<>();
+
+    static {
+        vowelSet.add('a');
+        vowelSet.add('e');
+        vowelSet.add('i');
+        vowelSet.add('o');
+        vowelSet.add('u');
+    }
 
     public static String newRecursiveMethod(String str) {
         StringBuilder out = new StringBuilder();
@@ -39,6 +51,34 @@ public class Algorithms {
             }
         }
         return new String(resultBuilder);
+    }
+
+    public static String newRecursiveMethodTest(String str) {
+        StringBuilder out = new StringBuilder();
+        char[] in = str.toCharArray();
+        int length = str.length();
+        doAsteriskTest(out, in, 0, length);
+        return out.toString();
+    }
+
+    private static void doAsteriskTest(StringBuilder out, char[] in, int index, int length) {
+        if (index == length) {
+            if (vowelSet.contains(in[length - 1])) out.setLength(out.length() - 1);
+            return;
+        }
+        try {
+            if (!vowelSet.contains(in[index])) {
+                out.append(in[index]);
+            } else if (index == 0) {
+                out.append(in[index]).append("*");
+            } else if (out.charAt(out.length() - 1) == '*') {
+                out.append(in[index]).append("*");
+            } else {
+                out.append("*").append(in[index]).append("*");
+            }
+        } finally {
+            doAsteriskTest(out, in, index + 1, length);
+        }
     }
 
     private static int countElements(StringBuilder resultBuilder, char aChar, int i, char[] chars) {
