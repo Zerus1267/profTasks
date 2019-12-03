@@ -161,6 +161,7 @@ public class Algorithms {
     public static List<Worker> mergeWorkersLists(List<Worker> workersOld, List<Worker> workersNew) {
         //List<Worker> newWorkerList = new ArrayList<>();
         List<Worker> safeWorkersNew = new ArrayList<>(workersNew);
+
         boolean flag = true;
         for (int i = 0; i < workersOld.size(); i++) {
             for (int j = 0; j < safeWorkersNew.size(); j++) {
