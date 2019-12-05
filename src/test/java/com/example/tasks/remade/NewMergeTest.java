@@ -4,6 +4,7 @@ import com.example.tasks.task_one.remade.Manager;
 import com.example.tasks.task_one.remade.Programmer;
 import com.example.tasks.task_one.remade.Worker;
 import com.example.tasks.task_two.remade.Algorithms;
+import com.example.tasks.task_two.remade2.RemadeAlgorithms;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class NewMergeTest {
 
     @Test
     public void mergeTest() throws IllegalAccessException {
-        Algorithms.newMergeMethod(workers1, workers2);
+        RemadeAlgorithms.newMergeMethod(workers1, workers2);
 
         // see @Before result list variables to ensure
         Assert.assertEquals("Stake value of first worker has not been updated, bit it should", 1900, workers1.get(0).getStake(), 0.0f); // should be worker 11 stake value

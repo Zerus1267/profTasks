@@ -5,6 +5,7 @@ import com.example.tasks.task_one.remade.Manager;
 import com.example.tasks.task_one.remade.Programmer;
 import com.example.tasks.task_one.remade.Worker;
 import com.example.tasks.task_two.remade.Algorithms;
+import com.example.tasks.task_two.remade2.RemadeAlgorithms;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,23 +21,23 @@ public class NewDeepMergeTest {
     private List<Worker> deep = new ArrayList<>();
 
     @Before
-    public void setUp(){
-        Worker worker1 = new Manager(2000, 200, 160, 1, new Address("Poltava","Grushevskogo","2"));
-        Worker worker2 = new Programmer(3000, 140, 160, 2, new Address("Kharkiv","Sumskaya","24"));
-        Worker worker3 = new Manager(2100, 190, 160, 3, new Address("Kyiv","Maidan","64"));
-        Worker worker4 = new Programmer(3500, 200, 160, 4, new Address("Lviv","Novaya","32"));
-        Worker worker5 = new Manager(1800, 120, 160, 5, new Address("Poltava","Europeyska","22"));
+    public void setUp() {
+        Worker worker1 = new Manager(2000, 200, 160, 1, new Address("Poltava", "Grushevskogo", "2"));
+        Worker worker2 = new Programmer(3000, 140, 160, 2, new Address("Kharkiv", "Sumskaya", "24"));
+        Worker worker3 = new Manager(2100, 190, 160, 3, new Address("Kyiv", "Maidan", "64"));
+        Worker worker4 = new Programmer(3500, 200, 160, 4, new Address("Lviv", "Novaya", "32"));
+        Worker worker5 = new Manager(1800, 120, 160, 5, new Address("Poltava", "Europeyska", "22"));
         workers1.add(worker1);
         workers1.add(worker2);
         workers1.add(worker3);
         workers1.add(worker4);
         workers1.add(worker5);
 
-        Worker worker11 = new Manager(1900, 210, 160, 1, new Address("Poltava","Europeyska","22"));
-        Worker worker12 = new Manager(2500, 170, 160, 6, new Address("Dnipro","Naberejna","52"));
-        Worker worker13 = new Manager(2100, 190, 160, 3, new Address("Lviv","Novaya","32"));
-        Worker worker14 = new Programmer(3100, 190, 160, 4, new Address("Lviv","Novaya","32"));
-        Worker worker15 = new Manager(1800, 120, 160, 5, new Address("New York","Old Street","6"));
+        Worker worker11 = new Manager(1900, 210, 160, 1, new Address("Poltava", "Europeyska", "22"));
+        Worker worker12 = new Manager(2500, 170, 160, 6, new Address("Dnipro", "Naberejna", "52"));
+        Worker worker13 = new Manager(2100, 190, 160, 3, new Address("Lviv", "Novaya", "32"));
+        Worker worker14 = new Programmer(3100, 190, 160, 4, new Address("Lviv", "Novaya", "32"));
+        Worker worker15 = new Manager(1800, 120, 160, 5, new Address("New York", "Old Street", "6"));
         workers2.add(worker11);
         workers2.add(worker12);
         workers2.add(worker13);
@@ -46,7 +47,7 @@ public class NewDeepMergeTest {
 
     @Test
     public void deepMergeTest() throws IllegalAccessException {
-        Algorithms.newMergeMethod(workers1, workers2);
+        RemadeAlgorithms.newMergeMethod(workers1, workers2);
 
         Assert.assertEquals("Stake value of first worker has not been updated, bit it should", 1900, workers1.get(0).getStake(), 0.0f); // should be worker 11 stake value
         Assert.assertEquals("Nested object hasn't been updated (Address.street)", "Europeyska", workers1.get(0).getAddress().getStreet());

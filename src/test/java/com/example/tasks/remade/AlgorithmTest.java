@@ -1,6 +1,7 @@
 package com.example.tasks.remade;
 
 import com.example.tasks.task_two.remade.Algorithms;
+import com.example.tasks.task_two.remade2.RemadeAlgorithms;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,4 +40,11 @@ public class AlgorithmTest {
         Assert.assertEquals("0 0 00 0 0 00 00 0 0 0 00 0 0 0 00 0 0 000", Algorithms.messageCoding(signal2));
     }
 
+    @Test
+    public void recTest() {
+        Assert.assertEquals("h*e*ll*o", RemadeAlgorithms.remadeRecursion(string1));
+        Assert.assertEquals("h*e*a*l*o", RemadeAlgorithms.remadeRecursion(string2));
+        Assert.assertEquals("a*bc", RemadeAlgorithms.remadeRecursion(string3));
+        Assert.assertEquals("o*a*b", RemadeAlgorithms.remadeRecursion(string4));
+    }
 }
