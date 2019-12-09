@@ -7,7 +7,11 @@ import java.util.*;
 
 public class RemadeAlgorithms {
 
-    private static HashSet<Character> vowelSet = new HashSet<>();
+    private static final int STRING_START = 0;
+    private static final int INTEGER_ONE = 1;
+    private static final int INTEGER_TWO = 2;
+    private static final String ASTERISK = "*";
+    private static final Set<Character> vowelSet = new HashSet<>();
 
     static {
         vowelSet.add('a');
@@ -22,44 +26,56 @@ public class RemadeAlgorithms {
     }
 
     private static String testRec(String str, int length) {
-        if (length == 0) {
+        if (length == STRING_START) {
             return str;
         }
-        if (vowelSet.contains(str.charAt(length - 1))) {
+        if (vowelSet.contains(str.charAt(length - INTEGER_ONE))) {
+            String nextStepString;
+            String startString = str.substring(STRING_START, length - INTEGER_ONE);
+            String endingString = str.substring(length);
+            char currentChar = str.charAt(length - INTEGER_ONE);
             if (length == str.length()) {
-                return testRec(str.substring(0, length - 1) + "*" + str.charAt(length - 1), length - 1);
-            } else if (length == 1) {
-                return str.charAt(0) + "*" + str.substring(1);
-            } else if (vowelSet.contains(str.charAt(length - 2))) {
-                return testRec(str.substring(0, length - 1) + str.charAt(length - 1) + "*" + str.substring(length, str.length()), length - 1);
+                nextStepString = startString + ASTERISK + currentChar;
+            } else if (length == INTEGER_ONE) {
+                return str.charAt(STRING_START) + ASTERISK + str.substring(INTEGER_ONE);
+            } else if (vowelSet.contains(str.charAt(length - INTEGER_TWO))) {
+                nextStepString = startString + currentChar + ASTERISK + endingString;
             } else {
-                return testRec(str.substring(0, length - 1) + "*" + str.charAt(length - 1) + "*" + str.substring(length, str.length()), length - 1);
+                nextStepString = startString + ASTERISK + currentChar + ASTERISK + endingString;
             }
-        } else {
-            return testRec(str, length - 1);
+            return testRec(nextStepString, length - INTEGER_ONE);
         }
+        return testRec(str, length - INTEGER_ONE);
     }
 
-    public static void newMergeMethod(List<Worker> workersA, List<Worker> workersB) throws IllegalAccessException {
-        HashSet<Integer> idB = new HashSet<>();
-        HashMap<Integer, Integer> mapA = new HashMap<>(); // Map for binding the ID's of workers in ListA and its' index in the ListA
-        for (Worker worker : workersB) {
-            idB.add(worker.getId());
-        }
-        // Delete elements from listA if they are not in ListB
-        workersA.removeIf(worker -> !idB.contains(worker.getId()));
+    public static List<Worker> mergeTwoWorkerLists(List<Worker> listA, List<Worker> listB) {
+        Set<Worker> workersA = new HashSet<>(listA);
+        Set<Worker> workersB = new HashSet<>(listB);
+        return newMergeMethod(workersA, workersB);
+    }
 
-        for (Worker worker : workersA) {
-            mapA.put(worker.getId(), workersA.indexOf(worker));
-        }
-        for (Worker worker : workersB) {
-            int temp = worker.getId();
-            if (mapA.containsKey(temp)) {
-                mergeUniversal(workersA.get(mapA.get(temp)), worker);
+    private static List<Worker> newMergeMethod(Set<Worker> workersA, Set<Worker> workersB) {
+
+        // Delete elements from listA if they are not in ListB
+        workersA.removeIf(worker -> !workersB.contains(worker));
+
+        for (Worker workerB : workersB) {
+            if (workersA.contains(workerB)) {
+                workersA.stream()
+                        .filter(worker -> Objects.equals(worker, workerB))
+                        .findFirst()
+                        .ifPresent(worker -> {
+                            try {
+                                mergeUniversal(worker, workerB);
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            }
+                        });
             } else {
-                workersA.add(worker);
+                workersA.add(workerB);
             }
         }
+        return new ArrayList<>(workersA);
     }
 
     private static void getAllFields(List<Field> fields, Class<?> type) {
@@ -76,7 +92,7 @@ public class RemadeAlgorithms {
                 || name.startsWith("oracle.");
     }
 
-    public static <T> T mergeUniversal(T objA, T objB) throws IllegalAccessException {
+    private static <T> T mergeUniversal(T objA, T objB) throws IllegalAccessException {
         List<Field> fields = new ArrayList<>();
         getAllFields(fields, objA.getClass());
         for (Field field : fields) {

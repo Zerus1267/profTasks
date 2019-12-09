@@ -46,8 +46,8 @@ public class NewDeepMergeTest {
     }
 
     @Test
-    public void deepMergeTest() throws IllegalAccessException {
-        RemadeAlgorithms.newMergeMethod(workers1, workers2);
+    public void deepMergeTest() {
+        workers1 = RemadeAlgorithms.mergeTwoWorkerLists(workers1, workers2);
 
         Assert.assertEquals("Stake value of first worker has not been updated, bit it should", 1900, workers1.get(0).getStake(), 0.0f); // should be worker 11 stake value
         Assert.assertEquals("Nested object hasn't been updated (Address.street)", "Europeyska", workers1.get(0).getAddress().getStreet());

@@ -1,5 +1,7 @@
 package com.example.tasks.task_one.remade;
 
+import java.util.Objects;
+
 public abstract class Worker {
     private double stake; // ставка работника в час
     private double workedHours; // отработаные часы
@@ -85,4 +87,16 @@ public abstract class Worker {
         this.address = address;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Worker)) return false;
+        Worker worker = (Worker) o;
+        return getId() == worker.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 }
