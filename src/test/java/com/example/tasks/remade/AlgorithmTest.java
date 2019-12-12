@@ -47,4 +47,12 @@ public class AlgorithmTest {
         Assert.assertEquals("a*bc", RemadeAlgorithms.remadeRecursion(string3));
         Assert.assertEquals("o*a*b", RemadeAlgorithms.remadeRecursion(string4));
     }
+
+    @Test
+    public void lastRecursionTest(){
+        Assert.assertEquals("h*e*ll*o", RemadeAlgorithms.lastRecursion(string1));
+        Assert.assertEquals("h*e*a*l*o", RemadeAlgorithms.lastRecursion(string2));
+        Assert.assertEquals("a*bc", RemadeAlgorithms.lastRecursion(string3));
+        Assert.assertEquals("o*a*b", RemadeAlgorithms.lastRecursion(string4));
+    }
 }

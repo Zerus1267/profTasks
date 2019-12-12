@@ -45,7 +45,7 @@ public class NewMergeTest {
     }
 
     @Test
-    public void mergeTest()  {
+    public void mergeTest() throws IllegalAccessException {
         workers1 = RemadeAlgorithms.mergeTwoWorkerLists(workers1,workers2);
         //RemadeAlgorithms.newMergeMethod(workers1, workers2);
 

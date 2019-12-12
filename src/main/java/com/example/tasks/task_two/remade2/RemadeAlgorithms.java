@@ -25,7 +25,7 @@ public class RemadeAlgorithms {
         return testRec(str, str.length());
     }
 
-    private static String testRec(String str, int length) {
+    private static String testRec(String str, int length) { // OLD VERSION
         if (length == STRING_START) {
             return str;
         }
@@ -48,34 +48,29 @@ public class RemadeAlgorithms {
         return testRec(str, length - INTEGER_ONE);
     }
 
-    public static List<Worker> mergeTwoWorkerLists(List<Worker> listA, List<Worker> listB) {
+    public static List<Worker> mergeTwoWorkerLists(List<Worker> listA, List<Worker> listB) throws IllegalAccessException {
         Set<Worker> workersA = new HashSet<>(listA);
         Set<Worker> workersB = new HashSet<>(listB);
-        return newMergeMethod(workersA, workersB);
+        Map<Integer, Worker> workerMap = new HashMap<>();
+        for(Worker worker : workersA){
+            workerMap.put(worker.getId(), worker);
+        }
+        return newMergeMethod(workerMap, workersB);
     }
 
-    private static List<Worker> newMergeMethod(Set<Worker> workersA, Set<Worker> workersB) {
+    private static List<Worker> newMergeMethod(Map<Integer,Worker> workersA, Set<Worker> workersB) throws IllegalAccessException {
 
         // Delete elements from listA if they are not in ListB
-        workersA.removeIf(worker -> !workersB.contains(worker));
+        workersA.entrySet().removeIf(integerWorkerEntry -> !workersB.contains(integerWorkerEntry.getValue()));
 
-        for (Worker workerB : workersB) {
-            if (workersA.contains(workerB)) {
-                workersA.stream()
-                        .filter(worker -> Objects.equals(worker, workerB))
-                        .findFirst()
-                        .ifPresent(worker -> {
-                            try {
-                                mergeUniversal(worker, workerB);
-                            } catch (IllegalAccessException e) {
-                                e.printStackTrace();
-                            }
-                        });
+        for (Worker worker : workersB) {
+            if (workersA.containsKey(worker.getId())) {
+                mergeUniversal(workersA.get(worker.getId()), worker);
             } else {
-                workersA.add(workerB);
+                workersA.put(worker.getId(),worker);
             }
         }
-        return new ArrayList<>(workersA);
+        return new ArrayList<>(workersA.values());
     }
 
     private static void getAllFields(List<Field> fields, Class<?> type) {
@@ -109,5 +104,17 @@ public class RemadeAlgorithms {
             field.setAccessible(false);
         }
         return objA;
+    }
+
+    public static String lastRecursion(String str) { // NEW RECURSION
+        if (str.length() == INTEGER_ONE) {
+            return str;
+        }
+        char currentChar = str.charAt(STRING_START);
+        String lastPart = String.valueOf(currentChar);
+        if (vowelSet.contains(currentChar) || vowelSet.contains(str.charAt(INTEGER_ONE)) && str.length() == INTEGER_TWO || !vowelSet.contains(currentChar) && vowelSet.contains(str.charAt(INTEGER_ONE))) {
+            lastPart = currentChar + ASTERISK;
+        }
+        return lastPart + lastRecursion(str.substring(INTEGER_ONE, str.length()));
     }
 }
