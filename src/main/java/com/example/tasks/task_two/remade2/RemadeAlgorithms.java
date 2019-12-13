@@ -4,6 +4,7 @@ import com.example.tasks.task_one.remade.Worker;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RemadeAlgorithms {
 
@@ -52,13 +53,13 @@ public class RemadeAlgorithms {
         Set<Worker> workersA = new HashSet<>(listA);
         Set<Worker> workersB = new HashSet<>(listB);
         Map<Integer, Worker> workerMap = new HashMap<>();
-        for(Worker worker : workersA){
+        for (Worker worker : workersA) {
             workerMap.put(worker.getId(), worker);
         }
         return newMergeMethod(workerMap, workersB);
     }
 
-    private static List<Worker> newMergeMethod(Map<Integer,Worker> workersA, Set<Worker> workersB) throws IllegalAccessException {
+    private static List<Worker> newMergeMethod(Map<Integer, Worker> workersA, Set<Worker> workersB) throws IllegalAccessException {
 
         // Delete elements from listA if they are not in ListB
         workersA.entrySet().removeIf(integerWorkerEntry -> !workersB.contains(integerWorkerEntry.getValue()));
@@ -67,7 +68,7 @@ public class RemadeAlgorithms {
             if (workersA.containsKey(worker.getId())) {
                 mergeUniversal(workersA.get(worker.getId()), worker);
             } else {
-                workersA.put(worker.getId(),worker);
+                workersA.put(worker.getId(), worker);
             }
         }
         return new ArrayList<>(workersA.values());
@@ -116,5 +117,31 @@ public class RemadeAlgorithms {
             lastPart = currentChar + ASTERISK;
         }
         return lastPart + lastRecursion(str.substring(INTEGER_ONE, str.length()));
+    }
+
+    public static String messageCodingNew(String str) {
+        List<Character> characterList = str.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+        char currentChar;
+        StringBuilder stringBuilder = new StringBuilder();
+        ListIterator<Character> iterator = characterList.listIterator();
+        while (iterator.hasNext()) {
+            if (iterator.next() == '0') {
+                stringBuilder.append("00 0");
+                currentChar = '0';
+            } else {
+                stringBuilder.append("0 0");
+                currentChar = '1';
+            }
+            while (iterator.hasNext()) {
+                if (iterator.next() == currentChar) {
+                    stringBuilder.append("0");
+                } else {
+                    iterator.previous();
+                    stringBuilder.append(" ");
+                    break;
+                }
+            }
+        }
+        return stringBuilder.toString();
     }
 }
