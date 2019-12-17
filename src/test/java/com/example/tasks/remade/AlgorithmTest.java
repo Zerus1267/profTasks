@@ -63,4 +63,12 @@ public class AlgorithmTest {
         Assert.assertEquals("00 0 0 0 00 000 0 000", RemadeAlgorithms.messageCodingNew(signal1));
         Assert.assertEquals("0 0 00 0 0 00 00 0 0 0 00 0 0 0 00 0 0 000", RemadeAlgorithms.messageCodingNew(signal2));
     }
+
+    @Test
+    public void extremeCodeTest(){
+        String signal1 = "01000111";
+        String signal2 = "101101010111";
+        Assert.assertEquals("00 0 0 0 00 000 0 000", RemadeAlgorithms.extremeMessageCoding(signal1));
+        Assert.assertEquals("0 0 00 0 0 00 00 0 0 0 00 0 0 0 00 0 0 000", RemadeAlgorithms.extremeMessageCoding(signal2));
+    }
 }

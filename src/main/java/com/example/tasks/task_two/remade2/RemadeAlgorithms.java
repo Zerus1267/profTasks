@@ -12,6 +12,8 @@ public class RemadeAlgorithms {
     private static final int INTEGER_ONE = 1;
     private static final int INTEGER_TWO = 2;
     private static final String ASTERISK = "*";
+    private static final String SPACE_SYMBOL = " ";
+    private static final String ZERO_SYMBOL = "0";
     private static final Set<Character> vowelSet = new HashSet<>();
 
     static {
@@ -140,6 +142,36 @@ public class RemadeAlgorithms {
                     stringBuilder.append(" ");
                     break;
                 }
+            }
+        }
+        return stringBuilder.toString();
+    }
+
+    private static String generateHead(char currentChar) {
+        String stringResult;
+        if (currentChar == '0') {
+            stringResult = "00 0";
+        } else {
+            stringResult = "0 0";
+        }
+        return stringResult;
+    }
+
+    public static String extremeMessageCoding(String str){
+        List<Character> characterList = str.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+        StringBuilder stringBuilder = new StringBuilder();
+        ListIterator<Character> iterator = characterList.listIterator();
+        char globalChar = iterator.next();
+        char localChar;
+        stringBuilder.append(generateHead(globalChar));
+        while (iterator.hasNext()) {
+            localChar = iterator.next();
+            if (localChar == globalChar) {
+                stringBuilder.append(ZERO_SYMBOL);
+            } else {
+                stringBuilder.append(SPACE_SYMBOL);
+                globalChar = localChar;
+                stringBuilder.append(generateHead(globalChar));
             }
         }
         return stringBuilder.toString();
